@@ -1,5 +1,4 @@
 from numba import njit, vectorize
-from .utils import timeit
 
 
 @njit
@@ -13,7 +12,6 @@ def progress_jit(i: int, I: int):
     """
     return i/I
 
-@timeit
 @vectorize(
     ['float64(complex128, int64, float64)'],
     target="parallel"
@@ -30,7 +28,7 @@ def compute_mandelbrot_set_vectorized(c, I, T):
     for i in range(I + 1):
         z = z*z + c
         if (z.real*z.real + z.imag*z.imag) > threshold:
-            return i/100
+            return i / I
     return 1.0
 
 

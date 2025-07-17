@@ -1,23 +1,25 @@
 """
 Helper functions, e.g., for timing functions
 """
-import time
+from dataclasses import fields
 
 
-# inspiration from https://stackoverflow.com/questions/1622943/timeit-versus-timing-decorator
-def timeit(f):
+# from ChatGPT
+def filter_to_dataclass(dataclass_type, data: dict):
     """
-    # TODO: docstring
+    Given a dataclass and a dictionary with config parameters,
+    it fills in the required parameters of the dataclass with 
+    the ones provided through the config file.
+    
+    Parameters:
+        dataclass_type: a dataclass
+        data: parameters from a config file (dict)
+        
+    Output:
+        an initialised dataclass of the type 'dataclass_type'
+        
+    The function was co-written with ChatGPT.
     """
-    
-    def timed(*args, **kwargs):
-        
-        ts = time.time()
-        result = f(*args, **kwargs)
-        te = time.time()
-        
-        print("func:%r took: %2.4f sec" % \
-            (f.__name__, te-ts))
-        return result
-    
-    return timed
+    valid_keys = {f.name for f in fields(dataclass_type)}
+    filtered_data = {k: v for k, v in data.items() if k in valid_keys}
+    return dataclass_type(**filtered_data)

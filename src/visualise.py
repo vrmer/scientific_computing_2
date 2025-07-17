@@ -1,13 +1,23 @@
+import os
 import numpy as np
 import matplotlib.pyplot as plt
 
 
-def plot_mandelbrot_set(mandelbrot_array: np.ndarray, outpath: str = None):
+def plot_mandelbrot_set(mandelbrot_array: np.ndarray, params):
     """
     # TODO: docstring + save figure
     # TODO: Also add customisation e.g. scales
     """
-    plt.imshow(mandelbrot_array, cmap=plt.cm.hot)
+    plt.imshow(mandelbrot_array, extent=(*params.real_val_lims, *params.imag_val_lims), origin="lower", cmap=plt.cm.hot)
     
-    if outpath:
-        plt.savefig(outpath)
+    # customise labels
+    plt.xlabel(r"$\mathfrak{R[c]}$")
+    plt.ylabel(r"$\mathfrak{I[c]}$")
+    
+    plt.xticks(np.linspace(*params.real_val_lims, num=7))
+    plt.yticks(np.linspace(*params.imag_val_lims, num=7))
+    
+    if params.figure_dir:
+        os.makedirs(params.figure_dir, exist_ok=True)
+        output_path = os.path.join(params.figure_dir, f"{params.backend}.pdf")
+        plt.savefig(output_path)

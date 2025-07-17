@@ -7,6 +7,10 @@ class Parameters:
     """
     # TODO: docstring
     """
+    # filepaths
+    figure_dir: str
+    output_dir: str
+    
     p_re: int
     p_im: int
     I: int

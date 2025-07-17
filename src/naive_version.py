@@ -1,5 +1,4 @@
 import numpy as np
-from .utils import timeit
 
 
 def progress(i: int, I: int):
@@ -34,7 +33,6 @@ def iteration(c: complex, I: int, T: int|float):
     return progress(i, I)
 
 
-@timeit
 def compute_mandelbrot_set_naive(C, params):
     """
     # TODO: docstring

@@ -1,13 +1,10 @@
+import time
 import tomllib
 import argparse
-from dask.distributed import Client
 from src import (
     init_meshgrid, compute_mandelbrot_set_naive, 
     compute_mandelbrot_set_vectorized, plot_mandelbrot_set, 
-    Parameters, compute_mandelbrot_set_distributed)
-
-# TODO: restructure main to incorporate all solutions from one code
-# TODO: run the full naive code
+    Parameters, compute_mandelbrot_set_distributed, filter_to_dataclass)
     
 
 
@@ -19,21 +16,27 @@ mandelbrot_set_compute_dict = {
 
 
 if __name__ == "__main__":
-
-    params = Parameters(
-        p_re=1000,
-        p_im=1000,
-        I=100,
-        backend="dask"
-    )
-
-    # meshgrid = init_meshgrid(params.p_re, params.p_im, params.real_val_lims, params.imag_val_lims)
-
-    meshgrid = init_meshgrid(params)
-
-    # TODO: change to pass the whole parameters
-    mandelbrot_set = mandelbrot_set_compute_dict[params.backend](meshgrid, params)
     
-    print(mandelbrot_set)
+    parser = argparse.ArgumentParser(
+        description="""Config with parameters for computing the Mandelbrot set""")
+    
+    parser.add_argument("config", help="Input toml file containing all necessary parameters.")
+    
+    args = parser.parse_args()
+    
+    # load parameters
+    with open(args.config, "rb") as f:
+        config = tomllib.load(f)
+        
+    params = filter_to_dataclass(Parameters, config)
 
-    plot_mandelbrot_set(mandelbrot_set, f"figures/{params.backend}.pdf")
+    # initialise the meshgrid
+    meshgrid = init_meshgrid(params)
+    # select the target function and calculate the mandelbrot set
+    start_time = time.time()
+    mandelbrot_set = mandelbrot_set_compute_dict[params.backend](meshgrid, params)
+    end_time = time.time()
+    # plot the mandelbrot set
+    plot_mandelbrot_set(mandelbrot_set, params)
+    
+    print(f"\nMandelbrot set computed using  {params.backend}  in  {round(end_time-start_time, 4)}  secs.")

@@ -1,0 +1,16 @@
+# simulation properties
+p_re = 5000
+p_im = 5000
+I = 100
+T = 2
+real_val_lims = [-2.0, 1.0]
+imag_val_lims = [1.5, -1.5]
+
+# output paths
+figure_dir = "figures/"
+output_dir = "output/"
+
+# backend information
+backend = "dask"  # naive, numba, or dask
+n_workers = 4
+threads_per_worker = 2
