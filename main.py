@@ -3,14 +3,14 @@ import tomllib
 import argparse
 from src import (
     init_meshgrid, compute_mandelbrot_set_naive, 
-    compute_mandelbrot_set_vectorized, plot_mandelbrot_set, 
+    compute_mandelbrot_set_vectorized_wrapper, plot_mandelbrot_set, 
     Parameters, compute_mandelbrot_set_distributed, filter_to_dataclass)
     
 
 
 mandelbrot_set_compute_dict = {
     "naive": compute_mandelbrot_set_naive,
-    "numba": compute_mandelbrot_set_vectorized,
+    "numba": compute_mandelbrot_set_vectorized_wrapper,
     "dask": compute_mandelbrot_set_distributed
 }
 

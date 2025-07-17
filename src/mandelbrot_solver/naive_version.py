@@ -1,15 +1,6 @@
 import numpy as np
 
 
-def progress(i: int, I: int):
-    r""" # TODO: fill in docstring
-    Helps evaluate how fast a number passed the threshold.
-    
-    $\mathcal{M}(c) = \dfrac{\imath(c)}{I}$
-    """
-    return i/I
-
-
 def mandelbrot_eq(z: int|float, c: complex):
     r"""
     Quadratic complex mapping.    
@@ -29,8 +20,8 @@ def iteration(c: complex, I: int, T: int|float):
     for i in range(1, I+1):
         z = mandelbrot_eq(z, c)
         if abs(z) > T:
-            return progress(i, I)
-    return progress(i, I)
+            return i / I
+    return 1.0
 
 
 def compute_mandelbrot_set_naive(C, params):
