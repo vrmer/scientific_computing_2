@@ -9,3 +9,14 @@
 2025-07-17 15:17:32,905 - INFO - Mandelbrot set computed using dask in 6.4306 secs.
 2025-07-17 15:17:32,905 - INFO - Performance achieved via 4 workers and 2 threads per worker.
 2025-07-17 15:17:32,905 - INFO - Speed up compared to using the naive implementation: 11.3025 times
+2025-07-17 16:01:58,287 - INFO - Substituting symbol R from STIXGeneral
+2025-07-17 16:01:58,287 - INFO - Substituting symbol [ from STIXGeneral
+2025-07-17 16:01:58,287 - INFO - Substituting symbol c from STIXGeneral
+2025-07-17 16:01:58,288 - INFO - Substituting symbol ] from STIXGeneral
+2025-07-17 16:01:58,296 - INFO - Substituting symbol I from STIXGeneral
+2025-07-17 16:01:58,296 - INFO - Substituting symbol [ from STIXGeneral
+2025-07-17 16:01:58,296 - INFO - Substituting symbol c from STIXGeneral
+2025-07-17 16:01:58,296 - INFO - Substituting symbol ] from STIXGeneral
+2025-07-17 16:01:58,331 - INFO - Mandelbrot set computed using dask in 5.9103 secs.
+2025-07-17 16:01:58,331 - INFO - Performance achieved via 4 workers and 2 threads per worker.
+2025-07-17 16:01:58,331 - INFO - Speed up compared to using the naive implementation: 12.2975 times

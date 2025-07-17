@@ -1,5 +1,5 @@
 """
-Helper functions, e.g., for timing functions
+Helper functions
 """
 from dataclasses import fields
 

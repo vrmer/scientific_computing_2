@@ -7,3 +7,12 @@
 2025-07-17 15:13:55,184 - INFO - Substituting symbol c from STIXGeneral
 2025-07-17 15:13:55,184 - INFO - Substituting symbol ] from STIXGeneral
 2025-07-17 15:13:55,218 - INFO - Mandelbrot set computed using numba in 0.5143 secs.
+2025-07-17 16:01:33,162 - INFO - Substituting symbol R from STIXGeneral
+2025-07-17 16:01:33,163 - INFO - Substituting symbol [ from STIXGeneral
+2025-07-17 16:01:33,163 - INFO - Substituting symbol c from STIXGeneral
+2025-07-17 16:01:33,163 - INFO - Substituting symbol ] from STIXGeneral
+2025-07-17 16:01:33,170 - INFO - Substituting symbol I from STIXGeneral
+2025-07-17 16:01:33,171 - INFO - Substituting symbol [ from STIXGeneral
+2025-07-17 16:01:33,171 - INFO - Substituting symbol c from STIXGeneral
+2025-07-17 16:01:33,171 - INFO - Substituting symbol ] from STIXGeneral
+2025-07-17 16:01:33,216 - INFO - Mandelbrot set computed using numba in 0.5167 secs.

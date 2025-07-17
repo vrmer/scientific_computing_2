@@ -4,6 +4,7 @@ from dask.distributed import Client
 from .numba_version import compute_mandelbrot_set_vectorized_wrapper
 
 
+@profile
 def compute_mandelbrot_set_distributed(C, params):
     """
     # TODO: docstring

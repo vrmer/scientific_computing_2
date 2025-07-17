@@ -1,0 +1,13 @@
+Wrote profile results to main.py.lprof
+Timer unit: 1e-06 s
+
+Total time: 0.523588 s
+File: /Users/IC18EG/PycharmProjects/scientific_computing/course_2/project_2/src/mandelbrot_solver/numba_version.py
+Function: compute_mandelbrot_set_vectorized_wrapper at line 34
+
+Line #      Hits         Time  Per Hit   % Time  Line Contents
+==============================================================
+    34                                           @profile
+    35                                           def compute_mandelbrot_set_vectorized_wrapper(c, params):
+    36         1     523588.0 523588.0    100.0      return compute_mandelbrot_set_vectorized(c, params.I, params.T)
+

@@ -1,0 +1,19 @@
+Wrote profile results to main.py.lprof
+Timer unit: 1e-06 s
+
+Total time: 157.665 s
+File: /Users/IC18EG/PycharmProjects/scientific_computing/course_2/project_2/src/mandelbrot_solver/naive_version.py
+Function: compute_mandelbrot_set_naive at line 27
+
+Line #      Hits         Time  Per Hit   % Time  Line Contents
+==============================================================
+    27                                           @profile
+    28                                           def compute_mandelbrot_set_naive(C, params):
+    29                                               """
+    30                                               # TODO: docstring
+    31                                               """
+    32         1         20.0     20.0      0.0      output_array = np.zeros(C.shape[0] * C.shape[1])
+    33  25000001    3504773.0      0.1      2.2      for idx, c in enumerate(C.ravel()):
+    34  25000000  154159711.0      6.2     97.8          output_array[idx] = iteration(c, params.I, params.T)
+    35         1         42.0     42.0      0.0      return output_array.reshape(C.shape[0], C.shape[1])
+

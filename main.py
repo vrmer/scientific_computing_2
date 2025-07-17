@@ -1,5 +1,6 @@
 import os
 import time
+import h5py
 import logging
 import tomllib
 import argparse
@@ -30,6 +31,7 @@ if __name__ == "__main__":
     parser.add_argument("-t", "--threads_per_worker",
                         help="Number of threads per worker, if not given, value from config file is used.",
                         required=False, type=int)
+    parser.add_argument("--do_profiling", action="store_true", help="If used, don't save outputs")
     
     args = parser.parse_args()
     
@@ -43,12 +45,21 @@ if __name__ == "__main__":
     params.n_workers = args.n_workers if args.n_workers else params.n_workers
     params.threads_per_worker = args.threads_per_worker if args.threads_per_worker else params.threads_per_worker
     
+    log_dir = "logs/"
+    
+    # set up profiling if revelant
+    if args.do_profiling:
+        log_dir = "logs/profiling"
+        
+    params.output_dir = None
+    params.figure_dir = None
+    
     # set up logging
-    os.makedirs("logs/", exist_ok=True)
+    os.makedirs(log_dir, exist_ok=True)
     
     logging.basicConfig(
-        filename=(f"logs/{params.backend}_w{params.n_workers}_t{params.threads_per_worker}.log" 
-                  if params.backend == "dask" else f"logs/{params.backend}.log"),
+        filename=(f"{log_dir}{params.backend}_w{params.n_workers}_t{params.threads_per_worker}.log" 
+                  if params.backend == "dask" else f"{log_dir}/{params.backend}.log"),
         level=logging.INFO,
         format="%(asctime)s - %(levelname)s - %(message)s"
     )
@@ -59,6 +70,12 @@ if __name__ == "__main__":
     start_time = time.time()
     mandelbrot_set = mandelbrot_set_compute_dict[params.backend](meshgrid, params)
     end_time = time.time()
+    # retain the mandelbrot set
+    if params.output_dir:
+        os.makedirs(params.output_dir, exist_ok=True)
+        outpath = os.path.join(params.output_dir, f"{params.backend}.hdf5")
+        with h5py.File(outpath, "w") as f:
+            f.create_dataset("mandelbrot_escapes", data=mandelbrot_set)
     # plot the mandelbrot set
     plot_mandelbrot_set(mandelbrot_set, params)
     
