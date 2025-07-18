@@ -2,7 +2,7 @@
 
 Project by Marcell Fekete for Aalborg University
 
-### Mandelbrot set
+#### Mandelbrot set
 
 It is a quadratic complex mapping:
 
@@ -22,45 +22,123 @@ $\mathcal{M}(c) = \dfrac{\imath(c)}{I}, \quad 0 < \mathcal{M}(c) \leq 1$
 
 Smaller $\mathcal{M}(c)$ values indicate faster progress of a specific complex point $c$ increases $|z_{i+1}|$. A point $c$ belongs to a Mandelbrot set if $|z_{n+1}|$ remains bounded for $n \rightarrow \infty$.
 
-_Numberphile_:
+See more details about the project by reading the project report: `report.pdf`
 
-> When iterations are stable (they don't blow up if you keep squaring them), then those numbers ($c$) can be part of the Mandelbrot set.
-> You just iterate again and again, and find out what happens in the long term. $\mathcal{M}(c)$ gives information on the stability.
+## Installation
 
-#### Task
+Clone the GitHub directory using the following command:
 
-Determine $\mathcal{M}(c)$ for a $c$-mesh which we limit: $-2 \leq \mathfrak{R}\{c\} \leq 1$ and $-1.5 \leq \mathfrak{I}\{c\} \leq 1.5$.
-We need to then select a number of points for each of $\mathfrak{R}\{c\}$ and $\mathfrak{I}\{c\}$ as $p_{\mathrm{re}}$ and $p_{\mathrm{im}}$.
+```
+git clone https://github.com/vrmer/scientific_computing_2.git
+```
 
-$\mathbf{C} = \left[ \begin{array}{rrr} -2.0 & \ldots & 1.0 \\ \vdots & & \vdots \\ -2.0 & \ldots & 1.0 \end{array} \right] + j \cdot \left[ \begin{array}{rrr} 1.5 & \ldots & 1.5 \\ \vdots & & \vdots \\ -1.5 & \ldots & -1.5 \end{array} \right] \in \mathbb{C}^{p_{re} \times p_{im}}$
+Create a new `conda` environment from the attached `environment.yaml` file and initialise it:
 
-$p_{re}$ and $p_{im}$ should be selected according to the computational resources available and the desired resolution. Good valeus can be $p_{re} = 5000$ and $p_{im} = 5000$ with a threshold of $T = 2$.
+```
+conda env create -f environment.yaml
+conda activate scientific_computing
+```
 
-***
+Install the `mandelbrot_solver` package from the root directory of the repository.
 
-### Checklist:
+```
+pip install -e .
+```
 
-1. Implementation
+## Usage
 
-A minimum of three versions:
-* A naive version
-* A vectorised numba, cython or f2py version
-* A multiprocessing version where the user can select a number of processing units
+To generate and plot the Mandelbrot set while saving all $\mathcal{M}(c)$ values for a target grid $C$ (also generated via the script), run the following script with a config file from the `configs` directory:
 
-Also validate for correctness.
+```
+python main.py configs/naive.toml
+```
 
-2. Output
+This provides the following parameters:
 
-Plots for the Mandelbrot sets, e.g., a colourmap using `matplotlib.pyplot.cm.hot`. Also compare execution time and in the case of the parallel version, execution time and speed-up versus number of units. Figures should be saved in PDF and relevant simulation data should be also saved including the output $\mathbf{z}$.
+* $p_\mathrm{re} = 5000$
+* $p_\mathrm{im} = 5000$
+* $I = 100$
+* $T = 2$
+* `real_val_lims` = $[-2.0, 1.0]$
+* `imag_val_lims` = $[1.5, -1.5]$
+* `figure_dir` = "figures/"
+* `output_dir` = "output/"
+* `backend` = "naive"
 
-3. Software design
+## Testing
 
-Explain considerations for overall design of modules and functions, as well as an algorithm. Also considerations for data types, parameter passing, etc.
+Running the `pytest` command carries out 8 tests in the `src/tests` directory, validating the naive, vectorised, and distributed implementations and comparing their behaviours. The tests also generate 5 warnings, connected to using the client functionality in the `Dask` library.
 
-4. Test plan
+## Directory Structure
 
-Brief explanation of test plan, to show I've tried implementing testing.
+#### `configs` directory
 
-5. Profiling and benchmarking
+It contains the configuration files in the toml format that are used to input parameters to the Mandelbrot implementations. The backend parameter allows passing "naive", "numba", or "dask" for the naive, the vectorised, and the distributed solution, respectively.
 
-`time.time`
+#### `figures` directory
+
+It contains the plots generated from the Mandelbrot solutions.
+
+#### `logs` directory
+
+Log files containing the timing of the various implementations. In the case of `Dask`, the filenames also contain the number of workers (`w`) and threads per worker (`t`) used.
+
+#### `src` directory
+
+It contains the source files of the repository in its subfolder, the `mandelbrot_solver`, as well as test files.
+
+##### `mandelbrot_solver` directory
+
+* `__init__.py`
+* `dask_version.py`: function computing the distributed solution
+* `meshgrid.py`: function initialising the meshgrid $C$
+* `naive_version.py`: functions computing the naive solution
+* `numba_version.py`: functions computing the vectorised solution
+* `parameters.py`: definition of the `Parameters` dataclass that handles variables
+* `utils.py`: helper function to allow for parameters in the config file to fill the parameters of the dataclass in `parameters.py`
+* `visualise.py`: function for plotting the Mandelbrot sets
+
+##### `tests` directory
+
+* `test_points.py`: test the behaviour of the solutions with respect to known points
+* `test_properties.py`: test the properties of the resulting Mandelbrot sets, e.g., symmetry with respect to the real axis
+
+#### `.gitignore`
+
+Files and directories to be ignored by the GitHub repository.
+
+#### `dask_notebook.ipynb`
+
+Notebook in which I was trying to solve the `dask` implementation.
+
+#### `dask_profile_output.txt`
+
+Results of the `dask` profiling.
+
+#### `environment.yaml`
+
+YAML file to initialise the conda environment from, for installation, see the section [Installation](#installation).
+
+#### `main.py`
+
+The main script of the repository (see [Usage](#usage)).
+
+#### `main.py.lprof`
+
+Non-human readable profiling file.
+
+#### `mandelbrot.ipynb`
+
+Notebook in which I was trying to solve the various implementations.
+
+#### `naive_profile_output.txt` and `numba_profile_output.txt`
+
+Results of the `naive` and `numba` profiling.
+
+#### `report.pdf`
+
+Full report on the project.
+
+#### `setup.py`
+
+It install the `mandelbrot_solver` package (see [Installation](#installation)).
