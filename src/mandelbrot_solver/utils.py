@@ -2,10 +2,11 @@
 Helper functions
 """
 from dataclasses import fields
+from .parameters import Parameters
 
 
 # from ChatGPT
-def filter_to_dataclass(dataclass_type, data: dict):
+def filter_to_dataclass(dataclass_type, data: dict) -> Parameters:
     """
     Given a dataclass and a dictionary with config parameters,
     it fills in the required parameters of the dataclass with 

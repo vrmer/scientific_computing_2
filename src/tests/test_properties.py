@@ -16,7 +16,7 @@ params = Parameters(
 
 class TestSymmetry:
     """
-    # TODO: docstring
+    The Mandelbrot sets should be symmetrical with respect to the real axis.
     """
     # ChatGPT inspiration
     def text_real_axis_symmetry_naive(self):

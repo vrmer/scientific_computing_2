@@ -1,10 +1,19 @@
 import numpy as np
-from typing import Tuple
+from .parameters import Parameters
 
 
-def init_meshgrid(params):
-    """  # TODO: add docstring
-    Initialise the meshgrid used to calculate the values of the Mandelbrot set.
+def init_meshgrid(params: Parameters) -> np.ndarray:
+    r"""
+    Initialise the $c$-mesh that the Mandelbrot set is calculated for.
+    
+    Relevant parameters from the Parameters dataclass:
+        p_re: dimensionality of the real values (int)
+        p_im: dimensionality of the imaginary values (int)
+        real_val_lims: minimum and maximum values in $\mathfrak{R[c]}$ (list or tuple of floats)
+        imag_val_lims: minimum and maximum values in $\mathfrak{I[c]}$ (list or tuple of floats)
+        
+    Returns:
+        a $c$-mesh C limiting the target complex plane (numpy array)
     """
     # initialise real and imaginary values
     real_vals = np.linspace(*params.real_val_lims, params.p_re)

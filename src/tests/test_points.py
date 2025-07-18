@@ -3,6 +3,7 @@ from mandelbrot_solver import (Parameters, compute_mandelbrot_set_naive,
                                compute_mandelbrot_set_vectorized_wrapper, compute_mandelbrot_set_distributed)
 
 
+# define parameters to use for testing
 params = Parameters(
     figure_dir=None,
     output_dir=None,
