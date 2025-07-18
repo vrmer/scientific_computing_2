@@ -20,3 +20,6 @@
 2025-07-17 16:01:58,331 - INFO - Mandelbrot set computed using dask in 5.9103 secs.
 2025-07-17 16:01:58,331 - INFO - Performance achieved via 4 workers and 2 threads per worker.
 2025-07-17 16:01:58,331 - INFO - Speed up compared to using the naive implementation: 12.2975 times
+2025-07-18 11:37:04,759 - INFO - Mandelbrot set computed using dask in 6.1184 secs.
+2025-07-18 11:37:04,759 - INFO - Performance achieved via 4 workers and 2 threads per worker.
+2025-07-18 11:37:04,759 - INFO - Speed up compared to using the naive implementation: 11.8792 times

@@ -27,7 +27,7 @@ class TestSymmetry:
             z2 = compute_mandelbrot_set_naive(c_conj, params)
             assert z1 == z2, f"Symmetry failed for {c} and {c_conj}: {z1} != {z2}"
             
-    def text_real_axis_symmetry_naive(self):
+    def text_real_axis_symmetry_vectorized(self):
         test_points = [complex(0.3, 0.5), complex(-0.8, 0.2), complex(-1, 0.01)]
         for c in test_points:
             c_conj = c.conjugate()
@@ -35,7 +35,7 @@ class TestSymmetry:
             z2 = compute_mandelbrot_set_vectorized_wrapper(c_conj, params)
             assert z1 == z2, f"Symmetry failed for {c} and {c_conj}: {z1} != {z2}"
             
-    def text_real_axis_symmetry_naive(self):
+    def text_real_axis_symmetry_distributed(self):
         test_points = [complex(0.3, 0.5), complex(-0.8, 0.2), complex(-1, 0.01)]
         for c in test_points:
             c_conj = c.conjugate()

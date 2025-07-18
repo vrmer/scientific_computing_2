@@ -32,7 +32,7 @@ _Numberphile_:
 Determine $\mathcal{M}(c)$ for a $c$-mesh which we limit: $-2 \leq \mathfrak{R}\{c\} \leq 1$ and $-1.5 \leq \mathfrak{I}\{c\} \leq 1.5$.
 We need to then select a number of points for each of $\mathfrak{R}\{c\}$ and $\mathfrak{I}\{c\}$ as $p_{\mathrm{re}}$ and $p_{\mathrm{im}}$.
 
-$\mathbf{C} = \left[ \begin{array}{rrr} -2.0 & \ldots & 1.0 \\ \vdots & & \vdots \\ -2.0 & \ldots & 1.0 \end{array} \right] + j \cdot \left[ \begin{array}{rrr} 1.5 & \ldots & 1.5 \\ \vdots & & \vdots \\ -1.5 & \ldots & -1.5 \end{array} \right] \in \mathbb{C^{p_{re} \times p_{im}}}$
+$\mathbf{C} = \left[ \begin{array}{rrr} -2.0 & \ldots & 1.0 \\ \vdots & & \vdots \\ -2.0 & \ldots & 1.0 \end{array} \right] + j \cdot \left[ \begin{array}{rrr} 1.5 & \ldots & 1.5 \\ \vdots & & \vdots \\ -1.5 & \ldots & -1.5 \end{array} \right] \in \mathbb{C}^{p_{re} \times p_{im}}$
 
 $p_{re}$ and $p_{im}$ should be selected according to the computational resources available and the desired resolution. Good valeus can be $p_{re} = 5000$ and $p_{im} = 5000$ with a threshold of $T = 2$.
 
