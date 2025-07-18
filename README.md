@@ -135,6 +135,10 @@ Notebook in which I was trying to solve the various implementations.
 
 Results of the `naive` and `numba` profiling.
 
+#### `output` directory
+
+The default output directory containing the `hdf5` files that save the Mandelbrot arrays. Due to the 200+ MB file size, they are not uploaded to the repository.
+
 #### `report.pdf`
 
 Full report on the project.
